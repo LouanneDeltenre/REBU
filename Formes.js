@@ -36,13 +36,9 @@ function setup(){
    logique_affectif = createSlider(0, 100, 50);
    logique_affectif.position(10, 50);
 
-   introversion_extraversion = createSlider(0, 100, 50);
+   introversion_extraversion = createSlider(-50, 300, 50);
    introversion_extraversion.position(10, 70);
 
-     PE = perception_entreprise.value;
-    AS = abstraction_sensation.value;
-    LA = logique_affectif.value;
-    IE = introversion_extraversion.value;
    
   }
 
@@ -52,6 +48,10 @@ function draw(){
   
   checker();
 
+    PE = perception_entreprise.value();
+    AS = abstraction_sensation.value();
+    LA = logique_affectif.value();
+    IE = introversion_extraversion.value();
   //===LERP=== 
 
   traitsNames.forEach(function(trait){
@@ -119,7 +119,7 @@ function checker(){
 
   if(window.traits.introversion.total > 0){
 
-    
+
     let intro = lerpedTrait(window.traits.introversion) * 100
 
   }
