@@ -437,7 +437,7 @@ function blob(P,c1,c2){
   
   beginShape();
       
-   for(let i = 0 ; i < points+3 ; i++){
+   for(let i = 0 ; i < points+1 ; i++){
 
     // le point précédent
     let prevAngle = TWO_PI / points * (i-1) ;
@@ -502,7 +502,7 @@ function blob2(P,c1,c2){
   
   beginShape();
       
-   for(let i = 0 ; i < points+3 ; i++){
+   for(let i = 0 ; i < points+1 ; i++){
 
     // le point précédent
     let prevAngle = TWO_PI / points * (i-1) ;
@@ -565,7 +565,7 @@ function blob3(P,c1,c2){
   
   beginShape();
       
-   for(let i = 0 ; i < points+3 ; i++){
+   for(let i = 0 ; i < points+1 ; i++){
 
     // le point précédent
     let prevAngle = TWO_PI / points * (i-1) ;
