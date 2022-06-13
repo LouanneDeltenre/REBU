@@ -1,0 +1,155 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+.Rebu-Canvas{
+	position: relative;
+  max-width: 800px;
+  min-width: 800px;
+  margin: 0 auto;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  line-height: 1.7rem;
+  position: fixed;
+  overflow: hidden; /* Hide scrollbars */ 
+}
+
+.quiz-container {
+ 
+  text-shadow: 1px 1px white;
+  padding: rem;
+  text-shadow: 0 1px #00000010;
+  margin: 5rem auto;
+	height: windowHeight/2;
+	width: windowWidth/2;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 30vw;
+  top: 10vh;
+}
+.question {
+  margin: 2rem 0;
+  font-size: 3rem;
+  color: white;
+  position: absolute;
+  left: 42vw;
+  top: 80vh;
+}
+
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+	position: fixed;
+	
+}
+
+
+.option {
+ 
+  color: white;
+  background: rgba(255, 255, 255, 0);
+  width: 10%;
+  border-radius: 5px;
+  transition: all 0.3s;
+  text-align: center;
+  font-size: 25px;
+	height: 10vh;
+	width: 10vw;
+}
+
+#option1{
+  position: fixed;
+	text-align: center;
+  top: 67vh;
+  left: 29vw;
+}
+#option2{
+  position: fixed;
+  top: 13vh;
+  left: 45vw;
+}
+#option3{
+  position: fixed;
+  top: 50vh;
+  left: 68vw;
+}
+
+
+
+
+.option:hover {
+ 
+  font-size: 200%;
+}
+.option input:checked .option {
+  background: red;
+  color: red;
+}
+.controls > * {
+  margin: 1rem;
+  position: fixed;
+
+}
+
+.next {
+  left: 47vw;
+  top: 51vw;
+}
+
+.previous {
+   left: 35vw;
+  top: 100vw;
+}
+button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  font-weight: 300;
+  color: white;
+  outline: none;
+  transform: scale(0.98);
+  transition: all 0.2s;
+}
+button.previous {
+  background: #c84630;
+}
+button.next {
+  background: #3c91e6;
+}
+button.restart {
+  background: #0cf574;
+  color: #00000050;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  transition: all 0.4s;
+}
+button.restart:hover {
+  color: #00000098;
+}
+button:hover,
+button:focus {
+  transform: scale(1);
+  font-weight: 200;
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+}

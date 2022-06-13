@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>REBU</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="./socket.io.min.js"></script>
+    <script src="js/p5.min.js"></script>
+    <script src="js/p5.sound.min.js"></script> 
+</head>
+
+<body>
+	
+    <div class="quiz-container">
+
+                
+         <!----------------------------------------------------->
+        <!-- Buttons ++  -->
+        
+        <label class="option" id="option1">
+            <input type="radio" name="option" value="1" />
+						<img src="Icones/Circle.png">
+            <span class="option1"></span>
+        </label>
+        <label class="option" id="option2">
+            <input type="radio" name="option" value="2" />
+            <img src="Icones/Square.png">
+						<span class="option2"></span>	
+        </label>
+        <label class="option" id="option3">
+            <input type="radio" name="option" value="3" />
+						<img src="Icones/Triangle.png">
+            <span class="option3"></span>
+						
+            <div id="question++" class="question"></div>
+        </label>
+        <!----------------------------------------------------->
+        <!-- Buttons --  -->
+      <!--     <div id="question++" class="question"></div>
+        <label class="option">
+            <input type="radio" name="option" value="-1" />
+            <span class="option1BIS"></span>
+        </label>
+        <label class="option">
+            <input type="radio" name="option" value="-2" />
+            <span class="option2BIS"></span>
+        </label>
+        <label class="option">
+            <input type="radio" name="option" value="-3" />
+            <span class="option3BIS"></span>
+        </label> -->
+        <!----------------------------------------------------->
+        <div class="controls">
+          <button class="next">Next</button>
+          <button class="previous">Previous</button>     
+        </div>
+
+        <div class="result1">
+        </div>
+
+        <div id="lumi"></div>
+        <div id="lumi2"></div>
+          </div>
+
+    <script src=Personnality_Quiz.js></script>
+    <script src=Formes.js></script>
+   
+
+
+
+</body>
+
+</html>
