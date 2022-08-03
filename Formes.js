@@ -9,58 +9,57 @@
 
   let Full_T = false;
   let Full_F = false;
-  let MID_TF = false;
+
   
   let Full_E = false;
   let Full_I = false;
 
-  let AS;
-  let PE;
-  let LA;
-  let IE;
+
 
 
 //============SYSTEM-SETUP=================
 
 
 function setup(){
-   canvas = createCanvas(1920,1000);
+   canvas = createCanvas(1920,1080);
    colorMode(HSB, 360,100,100);
 
-   perception_entreprise = createSlider(0, 100, 50);
+   perception_entreprise = createSlider(0, 100, 0);
    perception_entreprise.position(10, 10);
 
-   abstraction_sensation = createSlider(0, 100, 50);
+   abstraction_sensation = createSlider(0, 100, 00);
    abstraction_sensation.position(10, 30);
 
-   logique_affectif = createSlider(0, 100, 50);
+   logique_affectif = createSlider(1, 3, 2);
    logique_affectif.position(10, 50);
 
-   introversion_extraversion = createSlider(-50, 300, 50);
+   introversion_extraversion = createSlider(-50, 300, 200);
    introversion_extraversion.position(10, 70);
-
    
   }
 
-//============SYSTEM-REALTIME=================
+//============DRAW-DRAW-DRAW=================
+
+let dataForUser1 = false; 
+let dataForUser2 = false; 
+let dataForUser3 = false; 
 
 function draw(){
-  
-  checker();
-
-    PE = perception_entreprise.value();
-    AS = abstraction_sensation.value();
-    LA = logique_affectif.value();
-    IE = introversion_extraversion.value();
+  	checker();
+	
+    let PE = perception_entreprise.value();
+    let AS = abstraction_sensation.value();
+    let LA = logique_affectif.value();
+    let IE = introversion_extraversion.value();
   //===LERP=== 
-
+	
   traitsNames.forEach(function(trait){
     if(window.traits[trait].transitionStart > 0){
-      var lerpAmount = (frameCount - window.traits[trait].transitionStart) / 120.0;
+			window.traits[trait].total += (window.traits[trait].oldtotal - window.traits[trait].total)/10 ;
+      //var lerpAmount = (frameCount - window.traits[trait].transitionStart) / 120.0;
     }
-    });
-
-  //===VARIABLES=== 
+  });
+	  //===VARIABLES=== 
 
 
 //============SYSTEM-MODULAR=================
@@ -68,70 +67,136 @@ function draw(){
   background(0,0,0); //canvas
    strokeJoin(BEVEL);
    strokeCap(SQUARE);
-
-//======SHAPE1======
-    User1(AS,IE,PE);
-//======SHAPE2======
-   User2(AS,IE,PE);
-//======SHAPE3======
-   User3(AS,IE,PE);
+	
+	//======SHAPE1======
+	if (window.currentQuestion > -1) {
+		if(dataForUser1 == false){
+			User1(AS,IE,PE,);
+		}else{
+			User1(dataForUser1[0],dataForUser1[1],dataForUser1[2]);
+		}
+	}
+	
+	//======SHAPE2=====
+	if (window.currentQuestion > 6) {
+		if(dataForUser1 == false){
+			dataForUser1 = [AS,IE,PE];
+		}
+		if(dataForUser2 == false){
+			User2(AS,IE,PE);
+		}else{
+			User2(dataForUser2[0],dataForUser2[1],dataForUser2[2]);
+		}
+	}
+	
+	//======SHAPE3======*
+	if (window.currentQuestion > 8) {
+		if(dataForUser2 == false){
+			dataForUser2 = [AS,IE,PE];
+		}
+   if(dataForUser3 == false){
+			User3(AS,IE,PE);
+		}else{
+			User3(dataForUser3[0],dataForUser3[1],dataForUser3[2]);
+		}
+	}
 }
 
 //================MODULES===================
 
-let A1;
-let A2;
-let A3;
-
-console.log(AS);
-
-let B1;
-let B2;
-let B3;
-
-let C1;
-let C2;
-let C3;
-
-
-function User1(A1,A2,A3){
-  blob(A1, A2, 2);
-  filtre(A3);
-  T_OR_F();
+		coulour();
+function User1(A1,A2,A3,A4){ 
+   	coulour(A4);
+		filtre(A3);
+    blob(A1, A2, 2);
+	 	
+    
 }
-
-function User2(B1,B2,B3){
-  blob(B1, B2, 2);
+  coulour();
+ function User2(B1,B2,B3, B4){
+  coulour(B4);
   filtre(B3);
-  T_OR_F();
+	 blob2(B1, B2, 2);
+  
 }
-
-function User3(C1,C2,C3){
-  blob(C1, C2, 2);
+	coulour();
+function User3(C1,C2,C3,C4){
+ 	coulour(C4);
   filtre(C3);
-  T_OR_F();
+	blob3(C1, C2, 2);
+  
 }
 
 
 //===SHAPE-SHIFTER===
 
 function checker(){
-
-  if(window.traits.introversion.total > 0){
-
-
-    let intro = lerpedTrait(window.traits.introversion) * 100
-
+	
+	if(logique_affectif.value() == 1){
+		Full_F=false;
+		Full_T= true;
+		console.log(Full_T);
+	}
+	if(logique_affectif.value() == 3){
+		Full_F= true;
+		Full_T = false;
+		console.log(Full_F);
+	}
+	
+	
+  if(window.traits.extraversion.total > 0){
+			
+     	introversion_extraversion.value(window.traits.extraversion.total + 200); 
+			console.log(Full_E,Full_I);
+		if (window.currentQuestion > -1) {
+		if(introversion_extraversion.value()< 300){Full_E = true}
+		if(introversion_extraversion.value()> 150){Full_I = true}
+		}
+		if (window.currentQuestion > 6) {
+		if(introversion_extraversion.value()< 600){Full_E = true}
+		if(introversion_extraversion.value()> 300){Full_I = true}
+		}
+		
   }
+  if(window.traits.introversion.total > 0){
+			
+     	introversion_extraversion.value(- window.traits.introversion.total + 200); 
+			console.log(Full_E,Full_I);
+		if (window.currentQuestion > -1) {
+		if(introversion_extraversion.value()< 300){Full_E = true}
+		if(introversion_extraversion.value()> 150){Full_I = true}
+		}
+		if (window.currentQuestion > 6) {
+		if(introversion_extraversion.value()> 600){Full_E = true}
+		if(introversion_extraversion.value()> 300){Full_I = true}
+		}
+		
+  }	
+	
 
   if(window.traits.perception.total > 0){
-    let percept = lerpedTrait(window.traits.perception) +3
+   perception_entreprise.value(window.traits.perception.total + 20);
   }
-
-   if(window.traits.extraversion.total > 0){
-    let intro = lerpedTrait(window.traits.extraversion) * -80
+  if(window.traits.entreprise.total > 0){
+   perception_entreprise.value(-window.traits.entreprise.total - 10);
+  }
+  if(window.traits.abstraction.total > 0){
+   abstraction_sensation.value(window.traits.abstraction.total + 20);
+  }
+  if(window.traits.sensation.total > 0){
+   abstraction_sensation.value(window.traits.sensation.total + 7);
+  }
+	if(window.traits.logique.total > 0){
+   logique_affectif.value(window.traits.logique.total);
+		 
+		 
   }
   
+ 
+
+
+// lerpedTrait(window.traits.perception) +3
+   
 
 
 }
@@ -154,140 +219,35 @@ function checker(){
 
 // ===========LIBRAIRIE DE DEGRADE=============
 
-function T_OR_F(){
 
-  if (Full_T == true) {
-    if (Full_E == true) {
-      noStroke();
-      fill();
-      conicGradientFill();
+function coulour(C4){
+		C4 = Full_F,Full_T;
+ 
+    if (Full_F == true) {
+    Full_T = false;
+		noFill();
+    stroke(25);
+    strokeWeight(10);
+    radialGradientStroke(
+        width/2-40, height/2-10, 0,
+        width/2-40, height/2-10, 380,
+        color(lerp(0,300,frameCount * 0.0001),lerp(150,300,frameCount * 0.001),100,100),
+        color(lerp(0,150,frameCount *0.0001),lerp(150,300,frameCount * 0.001),100,100));
     }
-     if (Full_I == true) {
-      noFill();
-      stroke();
-      strokeWeight();
-      conicGradientStroke(); 
-    }
-    else{
-      noStroke();
-      fill(25);
-    }
-  }
+   
+	if( Full_T == true){
+		Full_T = true;
+		noStroke();
+    fill(25);
+		linearGradientFill(
+         width/2, 200,//Start pX, pY, start circle radius
+    width/2, height-200,//End pX, pY, End circle radius
+    color(lerp(0,300,frameCount * 0.0001), lerp(150,300,frameCount * 0.001), 100, 100), //Start color
+    color(lerp(0,300,frameCount * 0.0001), lerp(150,300,frameCount * 0.001), 100)); //End color
+			
+	}
+      
 
-//==
-
-  else if (MID_TF == true) {
-    if (Full_E == true) {
-      noStroke();
-      fill();
-      linearGradientFill();
-    }
-     if (Full_I == true) {
-
-      noFill();
-      stroke();
-      strokeWeight();
-      linearGradientStroke();
-    }
-    else{
-      noStroke();
-      fill(25);
-    }
-  }
-
-//==
-
-    else if (Full_F == true) {
-      if (Full_E == true) {
-      noStroke();
-      fill();
-      radialGradientFill();
-    }
-     if (Full_I == true) {
-
-      noFill();
-      stroke();
-      strokeWeight();
-      radialGradientStroke();
-    }
-    else{
-      noStroke();
-      fill(25);
-    }
-//==
-
-    if (Full_T == false) {
-      noStroke();
-      fill(25);
-    }
-    if (Full_F == false) {
-      noStroke();
-      fill(25);
-    }
-    if (MID_TF == false) {
-      noStroke();
-      fill(25);
-    }
-
-  }
-}
-
-function ConicGradient_Stroke(){
-  conicGradientStroke(
-    0, width/2, height/2,
-    [
-      color(190,100,100,100),
-      color(100,100,100,100),
-      color(10,100,100,100),
-      color(280,100,100,100)
-    ]
-    );
-}
-
-function ConicGradient_Stroke(){
-   conicGradientFill(
-    0, width/2, height/2,
-    [
-      color(190,100,100,100),
-      color(100,100,100,100),
-      color(10,100,100,100),
-      color(280,100,100,100)
-    ]
-    )
-}
-
-
-
-function Gradient_Fill(){
-  radialGradientFill(
-      width/2-40, height/2-120, 0,
-      width/2-40, height/2-120, 380,
-      color(lerp(180,290,frameCount * 0.00001),100,100,100),
-      color(lerp(320,200,frameCount * 0.00001),100,100,100));
-}
-
-function Gradient_Stroke(){
-  radialGradientStroke(
-      width/2-40, height/2-120, 0,
-      width/2-40, height/2-120, 380,
-      color(lerp(50,100,frameCount * 0.00001),100,100,100),
-      color(lerp(200,360,frameCount *0.00001),100,100,100));
-}
-
-function linear_Stroke(){
-  linearGradientStroke(
-      width/2-40, height/2-120, 0,
-      width/2-40, height/2-120, 380,
-      color(lerp(50,100,frameCount * 0.00001),100,100,100),
-      color(lerp(200,360,frameCount *0.00001),100,100,100));
-}
-
-function linear_Fill(){
-  linearGradientStroke(
-      width/2-40, height/2-120, 0,
-      width/2-40, height/2-120, 380,
-      color(lerp(50,100,frameCount * 0.00001),100,100,100),
-      color(lerp(200,360,frameCount *0.00001),100,100,100));
 }
 
 
@@ -323,7 +283,7 @@ function linearGradientFill(sX, sY, eX, eY, colorS, colorE)
       gradient.addColorStop(1,colorE); //Bleu
 
    //drawingContext.strokeStyle = gradient;
-     drawingContext.strokeStyle = gradient;
+     drawingContext.fillStyle = gradient;
    
 }
 
@@ -493,8 +453,8 @@ function blob(P,c1,c2){
 function blob2(P,c1,c2){
 
 
- let x = width/2 + 2;
- let y = height/2;
+ let x = width/2;
+ let y = height/2 - 50;
 
    points = P;
    courbature = c1 * (c2 - width/2) / width;
@@ -557,7 +517,7 @@ function blob2(P,c1,c2){
 
 function blob3(P,c1,c2){
  let x = width/2 + 100;
-  let y = height/2;
+  let y = height/2 + 150;
 
    points = P;
    courbature = c1 * (c2 - width/2) / width;

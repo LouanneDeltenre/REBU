@@ -23,57 +23,191 @@ function messageReceiver(name, face) {
 
 const questions = [
   {
-    "text": "vacances = ?",
-    "trait": "extraversion",
+    "text": " Choisir route",
+    "trait": "abstraction",
     "answers":[
         {
-            "text": "rien prevu",
+            "text": "courte mais difficile",
             "score": 1
         },
         {
-            "text": "auto-stop",
+            "text": "facile mais longue",
             "score": 2
         },
         {
-            "text": "reserve",
+            "text": "facile mais longue en allant tres vite",
             "score": 3
         }
 
     ]
   },
   {
-    "text": "projet de groupe = ?",
+    "text": "Travail passionnant mais collègues odieux",
+    "trait": "perception",
     "trait": "perception",
     "answers":[
         {
-            "text": "seul",
+            "text": "rester et s&#039isoler",
             "score": 1
         },
         {
-            "text": "amis",
+            "text": "partir",
             "score": 2
         },
         {
-            "text": "nouveau/nouvelle",
+            "text": "rester et pers&eacutev&eacuterer",
             "score": 3
         }
 
     ]
   },
   {
-    "text": "ça fonctionne ? ",
+    "text": "Mélancolique",
     "trait": "extraversion",
     "answers":[
         {
-            "text": "oui",
+            "text": "voir des ami-e-s",
             "score": 1
         },
         {
-            "text": "non",
+            "text": "rester seul-e",
             "score": 2
         },
         {
-            "text": "peut-être",
+            "text": "rencontrer des inconnu-e-s",
+            "score": 3
+        }
+
+    ]
+  },
+	{
+    "text": "Idée de projet à plusieurs",
+    "trait": "logique",
+    "answers":[
+        {
+            "text": "faire avec ancien-e-s coll&egravegues",
+            "score": 1
+        },
+        {
+            "text": "faire seul-e",
+            "score": 2
+        },
+        {
+            "text": "faire avec un-e inconnu-e",
+            "score": 3
+        }
+
+    ]
+  },
+	{
+    "text": "Ami-e quitt&eacute-e",
+    "trait": "sensation",
+    "answers":[
+        {
+            "text": "&eacutecouter",
+            "score": 1
+        },
+        {
+            "text": "expliquer la logique",
+            "score": 2
+        },
+        {
+            "text": "vengeance",
+            "score": 3
+        }
+
+    ]
+  },
+	{
+    "text": "Connaître",
+    "trait": "extraversion",
+    "answers":[
+        {
+            "text": "avec un livre ",
+            "score": 1
+        },
+        {
+            "text": "en essayant",
+            "score": 2
+        },
+        {
+            "text": "en imitant",
+            "score": 3
+        }
+
+    ]
+  },
+	{
+    "text": "Voyage",
+    "trait": "perception",
+    "answers":[
+        {
+            "text": "improvisation",
+            "score": 1
+        },
+        {
+            "text": "autostop",
+            "score": 2
+        },
+        {
+            "text": "r&eacuteserver",
+            "score": 3
+        }
+
+    ]
+  },
+	{
+    "text": "S'amuser",
+    "trait": "introversion",
+    "answers":[
+        {
+            "text": "avec ami-e-s",
+            "score": 1
+        },
+        {
+            "text": "seul-e",
+            "score": 2
+        },
+        {
+            "text": "avec des inconnu-e-s",
+            "score": 3
+        }
+
+    ]
+  },
+	{
+    "text": "Dysfonctionnement",
+    "trait": "sensation",
+    "answers":[
+        {
+            "text": "se renseigner",
+            "score": 1
+        },
+        {
+            "text": "bidouiller",
+            "score": 2
+        },
+        {
+            "text": " deamander de l'aide",
+            "score": 3
+        }
+
+    ]
+  },
+	{
+    "text": "fan d'une célébrité je veux...",
+    "trait": "entreprise",
+    "answers":[
+        {
+            "text": "le/la rencontrer",
+            "score": 1
+        },
+        {
+            "text": "lire sa biographie",
+            "score": 2
+        },
+        {
+            "text": "lui écrire",
             "score": 3
         }
 
@@ -97,49 +231,49 @@ window.traits = {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",//la valeur qui est passée au lerp
-        "transitionStart": 0
+        "transitionStart": 1
     }, 
     "entreprise" : {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",
-        "transitionStart": 0
+        "transitionStart": 1
     },
     "abstraction" : {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",
-        "transitionStart": 0
+        "transitionStart":1
     },
      "sensation" : {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",
-        "transitionStart": 0
+        "transitionStart":1
     },
      "logique" : {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",
-        "transitionStart": 0
+        "transitionStart": 1
     },
      "affectif" : {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",
-        "transitionStart": 0
+        "transitionStart": 1
     },
      "introversion" : {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",
-        "transitionStart": 0
+        "transitionStart": 1
     },
      "extraversion" : {
         "total" : 0,
         "oldtotal" : 0,
         "transition" : "3",// on l'utilise plus, il faudra le virer
-        "transitionStart": 0
+        "transitionStart": 1
     },
 }
 
@@ -160,25 +294,28 @@ const selectedOption = document.querySelector('input[type="radio"]:checked');
 
 
 const totalQuestions = questions.length;
-let currentQuestion = 0;
+window.currentQuestion = 0;
 let score = [];
 let selectedAnswersData = [];
 
-displayQuestion(currentQuestion);
+displayQuestion(window.currentQuestion);
 nextButton.addEventListener('click', processAnswer);
 previousButton.addEventListener('click',loadPreviousQuestion);
 
+function recordAnswer(){
+	
+}
 function totaliser(){
     
     traitsNames.forEach(function(trait){
-        window.traits[trait].oldtotal = window.traits[trait].total;
+       // window.traits[trait].oldtotal = window.traits[trait].total;
         
         //on remet le score total à zéro
-        window.traits[trait].total = 0;
+      //  window.traits[trait].total = 0;
 
         //pour le lerp
-        window.traits[trait].transition = 0;
-        window.traits[trait].transitionStart = frameCount;
+     //   window.traits[trait].transition = 0;
+       // window.traits[trait].transitionStart = frameCount;
     });
 
     //on recalcule les nouveaux totaux
@@ -186,9 +323,10 @@ function totaliser(){
         console.log("totaliser()");
         console.log(item);
         console.log(window.traits[item.trait]);
-        window.traits[item.trait].total += item.score;
+        window.traits[item.trait].oldtotal += item.score;
         console.log(window.traits[item.trait]);
     });
+		selectedAnswersData = [];
 }
 
 function displayQuestion(index){
@@ -211,19 +349,19 @@ function processAnswer () {
 
 
     selectedAnswersData.push({
-        "trait":questions[currentQuestion].trait,
+        "trait":questions[window.currentQuestion].trait,
         "score":answerScore
     });
 
-    currentQuestion++;
+    window.currentQuestion++;
 
     selectedOption.checked = false;
     //If quiz is on the final question
-    if(currentQuestion == totalQuestions - 1) {
+    if(window.currentQuestion == totalQuestions - 1) {
         nextButton.textContent = 'Finish';
     }
     //If the quiz is finished then we hide the questions container and show the results 
-    if(currentQuestion == totalQuestions) {
+    if(window.currentQuestion == totalQuestions) {
         container.style.display = 'none';
         result.innerHTML =
          `<h1 class="final-score">Your score:${option1_Total}</h1>
@@ -241,23 +379,23 @@ function processAnswer () {
     }
 
     totaliser();
-    displayQuestion(currentQuestion);
+    displayQuestion(window.currentQuestion);
 }
 
 
 function loadPreviousQuestion(){
-	currentQuestion--;
+	window.currentQuestion--;
 	//enlève la dernière valeure du tableau
 	score_NS.pop();
 	//genère la question
-	displayQuestion(currentQuestion);
+	displayQuestion(window.currentQuestion);
 }
 
 //Fuction to reset and restart the quiz;
 function restartQuiz(e) {
     if(e.target.matches('button')) {
     //reset array index and score
-    currentQuestion = 0;
+    window.currentQuestion = 0;
     score = [];
     //Reload quiz to the start
     location.reload();
